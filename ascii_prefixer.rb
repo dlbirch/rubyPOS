@@ -27,7 +27,7 @@ class Ascii_Prefixer
     Ascii_Prefixer.new(6)
   end
 
-  def initialize(prefix_nbr_digits)
+  def initialize(prefix_nbr_digits=1)
     if (prefix_nbr_digits.to_s =~ /^(0|[1-9][0-9]*)$/) &&  prefix_nbr_digits > 0 # Only non-zero, positive integers
       @prefix_nbr_digits = prefix_nbr_digits
     else
