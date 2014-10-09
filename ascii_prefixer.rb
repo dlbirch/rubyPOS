@@ -1,37 +1,39 @@
-class Ascii_Prefixer
+require 'iso_error'
+
+class AsciiPrefixer
 
   attr_accessor :prefix_nbr_digits
   ASCII_ZERO = 0x30
 
   def self.L
-    Ascii_Prefixer.new(1)
+    AsciiPrefixer.new(1)
   end
 
   def self.LL
-    Ascii_Prefixer.new(2)
+    AsciiPrefixer.new(2)
   end
 
   def self.LLL
-    Ascii_Prefixer.new(3)
+    AsciiPrefixer.new(3)
   end
 
   def self.LLLL
-    Ascii_Prefixer.new(4)
+    AsciiPrefixer.new(4)
   end
 
   def self.LLLLL
-    Ascii_Prefixer.new(5)
+    AsciiPrefixer.new(5)
   end
 
   def self.LLLLLL
-    Ascii_Prefixer.new(6)
+    AsciiPrefixer.new(6)
   end
 
   def initialize(prefix_nbr_digits=1)
-    if (prefix_nbr_digits.to_s =~ /^(0|[1-9][0-9]*)$/) &&  prefix_nbr_digits > 0 # Only non-zero, positive integers
+    if (prefix_nbr_digits.to_s =~ /^(0|[1-9][0-9]*)$/) &&  prefix_nbr_digits > 0 &&  prefix_nbr_digits <= 6 # Only non-zero, positive integers
       @prefix_nbr_digits = prefix_nbr_digits
     else
-        raise IsoError, IsoError.tag_the_error_message("prefix_nbr_digits - value must be a positive integer.")
+        raise IsoError, IsoError.tag_the_message("prefix_nbr_digits - value must be a positive integer less than 7.")
     end
   end
 
@@ -43,7 +45,7 @@ class Ascii_Prefixer
       length /= 10
     end
     if length != 0 then
-      raise(IsoError, IsoError.tag_the_error_message("Bad prefix_value - value must be a positive integer with #{prefix_nbr_digits.to_s} number of digits"))
+      raise(IsoError, IsoError.tag_the_message("Bad prefix_value '#{@prefix_nbr_digits.to_s}'- value must be a positive integer with number of digits less than 7"))
     else
       prefix_bytes.reverse
     end
@@ -57,7 +59,7 @@ class Ascii_Prefixer
       end
       prefix_bytes[0..(@prefix_nbr_digits - 1)].pack(template_chars.join.to_s)
     else
-      raise(IsoError, IsoError.tag_the_error_message("Bad prefix_nbr_digits '#{@prefix_nbr_digits.to_s}'- value must be a positive integer."))
+      raise(IsoError, IsoError.tag_the_message("Bad prefix_nbr_digits '#{@prefix_nbr_digits.to_s}'- value must be a positive integer less than 7."))
     end
   end
 
