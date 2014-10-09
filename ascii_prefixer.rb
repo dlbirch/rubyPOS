@@ -30,10 +30,14 @@ class AsciiPrefixer
   end
 
   def initialize(prefix_nbr_digits=1)
-    if (prefix_nbr_digits.to_s =~ /^(0|[1-9][0-9]*)$/) &&  prefix_nbr_digits > 0 &&  prefix_nbr_digits <= 6 # Only non-zero, positive integers
-      @prefix_nbr_digits = prefix_nbr_digits
-    else
+    begin
+      if (prefix_nbr_digits.to_s =~ /^(0|[1-9][0-9]*)$/) &&  prefix_nbr_digits > 0 &&  prefix_nbr_digits <= 6 # Only non-zero, positive integers
+        @prefix_nbr_digits = prefix_nbr_digits
+      else
         raise IsoError, IsoError.tag_the_message("prefix_nbr_digits - value must be a positive integer less than 7.")
+      end
+    rescue
+      raise IsoError, IsoError.tag_the_message("prefix_nbr_digits - value must be a positive integer less than 7.")
     end
   end
 
@@ -55,7 +59,7 @@ class AsciiPrefixer
     if @prefix_nbr_digits > 0
       template_chars = []
       @prefix_nbr_digits.times do
-        template_chars << 'C' #Unsigned byte
+        template_chars << 'C' # Unsigned byte
       end
       prefix_bytes[0..(@prefix_nbr_digits - 1)].pack(template_chars.join.to_s)
     else
