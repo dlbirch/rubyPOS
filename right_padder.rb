@@ -8,7 +8,7 @@ class RightPadder
     RightPadder.new()
   end
 
-	 # Creates a RightPadder with a specific pad character.
+	# Creates a RightPadder with a specific pad character.
   def initialize(pad=' ')
     @pad_char = pad
   end
