@@ -30,15 +30,11 @@ class AsciiPrefixer
   end
 
   def initialize(prefix_nbr_digits=1)
-    begin
       if (prefix_nbr_digits.to_s =~ /^(0|[1-9][0-9]*)$/) &&  prefix_nbr_digits > 0 &&  prefix_nbr_digits <= 6 # Only non-zero, positive integers
         @prefix_nbr_digits = prefix_nbr_digits
       else
         raise IsoError, IsoError.tag_the_message("prefix_nbr_digits - value must be a positive integer less than 7.")
       end
-    rescue
-      raise IsoError, IsoError.tag_the_message("prefix_nbr_digits - value must be a positive integer less than 7.")
-    end
   end
 
   def encode_length(prefix_value, prefix_bytes=[])
@@ -49,7 +45,7 @@ class AsciiPrefixer
       length /= 10
     end
     if length != 0 then
-      raise(IsoError, IsoError.tag_the_message("Bad prefix_value '#{@prefix_nbr_digits.to_s}'- value must be a positive integer with number of digits less than 7"))
+      raise(IsoError, IsoError.tag_the_message("Bad prefix_value of #{prefix_value.to_s} (contains too many digits). Value must be a positive integer with number of digits <= #{@prefix_nbr_digits.to_s}"))
     else
       prefix_bytes.reverse
     end
@@ -61,14 +57,14 @@ class AsciiPrefixer
       @prefix_nbr_digits.times do
         template_chars << 'C' # Unsigned byte
       end
-      prefix_bytes[0..(@prefix_nbr_digits - 1)].pack(template_chars.join.to_s)
+      prefix_bytes[0..(@prefix_nbr_digits - 1)].pack(template_chars.join).to_i
     else
-      raise(IsoError, IsoError.tag_the_message("Bad prefix_nbr_digits '#{@prefix_nbr_digits.to_s}'- value must be a positive integer less than 7."))
+      raise(IsoError, IsoError.tag_the_message("Bad prefix_nbr_digits '#{@prefix_nbr_digits.to_s}' - value must be a positive integer less than 7."))
     end
   end
 
-  def getPackedLength(prefix_bytes)
-    return decode_length(prefix_bytes)
+  def getPackedLength()
+    return @prefix_nbr_digits
   end
 
 end
