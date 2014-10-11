@@ -15,11 +15,13 @@ class RightPadder
 
   def pad(data, max_length)
 
+    padded_data = data
     if (data.size < max_length)
       padded_data = data.ljust(max_length, @pad_char)
     elsif (data.size > max_length)
-      raise IsoError.tag_the_message("Data is too long. Max = " + max_length)
+      raise IsoError, IsoError.tag_the_message("Data is too long. Max = " + max_length.to_s)
     end
+    return padded_data
 
   end
 
