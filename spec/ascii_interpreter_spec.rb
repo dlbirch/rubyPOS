@@ -2,7 +2,7 @@ require 'rspec'
 require 'ascii_interpreter'
 
 describe AsciiInterpreter do
-
+ 
   it 'should return a new instance' do
     ai = AsciiInterpreter.new()
     expect(ai).to be_truthy
