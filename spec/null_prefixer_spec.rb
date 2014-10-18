@@ -16,7 +16,7 @@ describe NullPrefixer do
   it 'should return a -1 for decode length and zero for packed length' do
     np = NullPrefixer.INSTANCE
     expect(np.decode_length([], 0)).to eq(-1)
-    expect(np.getPackedLength()).to eq(0)
+    expect(np.get_packed_length()).to eq(0)
   end
 
 end

@@ -15,7 +15,7 @@ class NullPrefixer
     return -1
   end
 
-  def getPackedLength()
+  def get_packed_length()
     return 0
   end
 

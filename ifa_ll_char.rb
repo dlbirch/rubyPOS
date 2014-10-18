@@ -1,7 +1,7 @@
 class IfaLLChar
   attr_accessor(:interpreter, :padder, :prefixer, :length, :description, :pad)
 
-  def initialize(interpreter, padder, prefixer, length: -1, description: '', pad: false)
+  def initialize(interpreter=LiteralInterpreter.INSTANCE, padder=NullPadder.INSTANCE, prefixer=NullPrefixer.INSTANCE, length: -1, description: '', pad: false)
 
     @interpreter = interpreter
     @padder = padder
@@ -19,12 +19,19 @@ class IfaLLChar
 
   end
 
+  ## Fix the parms here on the interpreter.getPackedLength call ...
   def get_max_packed_length()
-    # add code to get the max packed length
+    #(@prefixer.getPackedLength()) + (@interpreter.getPackedLength())
   end
 
+  # Return a byte[] after packing this component
   def pack(iso_component)
     # add code here to return a byte[] after packing this component
+  end
+
+  # Update the iso_component value after unpacking the byte array
+  def unpack(iso_component, byte_array, offset)
+    # add code here to update the iso_component value after unpacking the byte array
   end
 
 

@@ -28,10 +28,10 @@ class AsciiInterpreter
 
   # Returns an ASCII string for a given byte_array
   def uninterpret(raw_data, offset, length)
-    raw_data[0..(length-1)].pack("C*") #.encode(AsciiInterpreter.ENCODING)
+    raw_data[offset..(length-1)].pack("C*") #.encode(AsciiInterpreter.ENCODING)
   end
 
-  def getPackedLength(n_data_units)
+  def get_packed_length(n_data_units)
     return n_data_units
   end
 
