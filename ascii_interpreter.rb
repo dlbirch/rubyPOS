@@ -1,4 +1,5 @@
 require 'iso_error'
+
 # ASCII Interpreter converts strings to and from ASCII bytes.
 # This class uses the US-ASCII encoding which all JVMs must support.
 class AsciiInterpreter
