@@ -3,7 +3,9 @@ require 'iso_error'
 class NullPadder
 
   # The only instance you need
-  INSTANCE = NullPadder.new()
+  def self.INSTANCE
+    NullPadder.new()
+  end
 
   def pad(data, maxLength)
       return data
