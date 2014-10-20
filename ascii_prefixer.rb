@@ -63,7 +63,7 @@ class AsciiPrefixer
     end
   end
 
-  def getPackedLength()
+  def get_packed_length()
     return @prefix_nbr_digits
   end
 
