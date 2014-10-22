@@ -1,7 +1,7 @@
 class IfaLLChar
   attr_accessor(:interpreter, :padder, :prefixer, :length, :description, :pad)
 
-  def initialize(interpreter=LiteralInterpreter.INSTANCE, padder=NullPadder.INSTANCE, prefixer=NullPrefixer.INSTANCE, length: -1, description: '', pad: false)
+  def initialize(interpreter=AsciiInterpreter.INSTANCE, padder=NullPadder.INSTANCE, prefixer=AsciiPrefixer.LL, length: -1, description: '', pad: false)
 
     @interpreter = interpreter
     @padder = padder
@@ -21,7 +21,7 @@ class IfaLLChar
 
   ## Fix the parms here on the interpreter.getPackedLength call ...
   def get_max_packed_length()
-    #(@prefixer.getPackedLength()) + (@interpreter.getPackedLength())
+    (@prefixer.get_packed_length) + (@interpreter.get_packed_length(@length))
   end
 
   # Return a byte[] after packing this component
@@ -34,7 +34,10 @@ class IfaLLChar
     # add code here to update the iso_component value after unpacking the byte array
   end
 
-
+  def set_length(length)
+    # check length?
+    @length = length
+  end
 
 
 
