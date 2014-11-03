@@ -6,7 +6,6 @@ java_import org.jpos.iso.ISOField
 module JposSpecHelper
 
   # Modify the jpos java classes to allow access to instance fields
-
   class Java::OrgJposIso::ISOMsg
     field_accessor :dirty => :dirty
     field_accessor :maxField => :max_field
@@ -18,7 +17,5 @@ module JposSpecHelper
     field_accessor :fieldNumber => :field_number
     field_accessor :value => :value
   end
-
-
 
 end

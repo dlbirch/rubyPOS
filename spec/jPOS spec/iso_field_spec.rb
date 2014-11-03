@@ -25,11 +25,13 @@ describe IsoField do
   it "should get bytes that match the jPOS version" do
     iso_field = IsoField.new(field_number: 2, value: "43583222233334444")
     jpos_iso_field = org.jpos.iso.ISOField.new(2, "43583222233334444")
-    puts "iso_field.get_bytes is: #{iso_field.get_bytes}"
+    ba = iso_field.get_bytes
     jba = []
     jba = jpos_iso_field.get_bytes
-    puts "jpos_iso_field.get_bytes is: #{jba.to_s}"
-    #expect(iso_field.get_bytes).to eq(jpos_iso_field.get_bytes)
+    ba.each_index do |i|
+      expect(ba[i]).to eq(jba[i])
+    end
+    expect(ba.size).to eq(jba.size)
   end
 
 end
