@@ -1,11 +1,8 @@
 require 'iso_error'
+require 'iso'
 
 class IsoField
   attr_accessor(:field_number, :value)
-
-  def self.ENCODING
-    Encoding::ISO8859_1
-  end
 
   def initialize(field_number: -1, value: '')
     @field_number = field_number
@@ -32,9 +29,11 @@ class IsoField
     unless @value.nil?
       byte_array = []
       begin
-        @value.encode(AsciiInterpreter.ENCODING)[0..(@value.size-1)].bytes do |b|
+        puts "@value is: #{@value.to_s}"
+        @value.encode(Iso.ENCODING)[0..(@value.size-1)].bytes do |b|
           byte_array << b
         end
+        puts "byte_array is: #{byte_array.to_s}"
         return byte_array
       rescue
         raise(IsoError, IsoError.tag_the_message("Unable to get bytes for value '#{value.to_s}' as ASCII byte array."))

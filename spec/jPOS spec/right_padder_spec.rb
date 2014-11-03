@@ -1,7 +1,6 @@
 require 'rspec'
 require 'right_padder'
-require 'java'
-require './lib/jpos.jar'
+require_relative './jpos_spec_helper'
 
 describe RightPadder do
 

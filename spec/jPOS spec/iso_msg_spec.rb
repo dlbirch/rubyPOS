@@ -1,22 +1,6 @@
 require 'rspec'
 require 'iso_msg'
-require 'java'
-require './lib/jpos.jar'
-java_import org.jpos.iso.ISOMsg
-java_import org.jpos.iso.ISOField
-
-# Modify the jpos java classes to allow access to instance fields
-class ISOMsg
-  field_accessor :dirty => :dirty
-  field_accessor :maxField => :max_field
-  field_accessor :fields => :fields
-  field_accessor :maxFieldDirty => :max_field_dirty
-end
-
-class Java::OrgJposIso::ISOField
-  field_accessor :value => :value
-end
-
+require_relative './jpos_spec_helper'
 
 describe IsoMsg do
 

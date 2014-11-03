@@ -1,9 +1,10 @@
 require 'iso_error'
+require 'iso'
 
 class AsciiPrefixer
 
   attr_accessor :prefix_nbr_digits
-  ASCII_ZERO = 0x30
+
 
   def self.L
     AsciiPrefixer.new(1)
@@ -41,7 +42,7 @@ class AsciiPrefixer
     length = prefix_value
     # Take the modulus and then divide by 10 - coercing the result to ASCII bytes by adding an ASCII Zero.
     @prefix_nbr_digits.times do |i|
-      prefix_bytes[i] = (length % 10) + ASCII_ZERO
+      prefix_bytes[i] = (length % 10) + Iso::ASCII_ZERO
       length /= 10
     end
     if length != 0 then

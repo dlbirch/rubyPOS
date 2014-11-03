@@ -1,4 +1,5 @@
 require 'iso_error'
+require 'iso'
 
 # ASCII Interpreter converts strings to and from ASCII bytes.
 # This class uses the US-ASCII encoding which all JVMs must support.
@@ -8,16 +9,16 @@ class AsciiInterpreter
     AsciiInterpreter.new()
   end
 
-  def self.ENCODING
-    Encoding::ISO8859_1
-  end
+  # def self.ENCODING
+  #   Encoding::ISO8859_1
+  # end
 
   # Returns an ASCII byte_array for a given string
   # Current implementation is not idiomatic Ruby (uses a return statement) .. would like to refactor this code
   def interpret(data, offset)
     byte_array = []
     begin
-      data.encode(AsciiInterpreter.ENCODING)[offset..(data.size-1)].bytes do |b|
+      data.encode(Iso.ENCODING)[offset..(data.size-1)].bytes do |b|
         byte_array << b
       end
       return byte_array

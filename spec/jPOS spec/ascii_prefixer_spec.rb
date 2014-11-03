@@ -1,7 +1,6 @@
 require 'rspec'
 require 'ascii_prefixer'
-require 'java'
-require './lib/jpos.jar'
+require_relative './jpos_spec_helper'
 
 describe AsciiPrefixer do
 
