@@ -2,6 +2,7 @@ require 'java'
 require './lib/jpos.jar'
 java_import org.jpos.iso.ISOMsg
 java_import org.jpos.iso.ISOField
+java_import org.jpos.iso.header.BaseHeader
 
 module JposSpecHelper
 
@@ -16,6 +17,10 @@ module JposSpecHelper
   class Java::OrgJposIso::ISOField
     field_accessor :fieldNumber => :field_number
     field_accessor :value => :value
+  end
+
+  class Java::OrgJposIsoHeader::BaseHeader
+
   end
 
 end
