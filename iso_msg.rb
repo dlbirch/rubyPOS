@@ -1,11 +1,14 @@
+require 'iso'
 require 'iso_error'
 require 'iso_field'
+require 'java'
 
 class IsoMsg
   attr_accessor(:fields, :bitmap, :max_field, :direction, :header, :dirty, :max_field_dirty, :field_number)
+  #attr_accessor(:packager, :source_ref)
 
   def initialize(field_number: -1, mti: nil)
-    @fields = {}
+    @fields = java.util.TreeMap.new
     @bitmap = []
     @max_field = -1
     @dirty = true

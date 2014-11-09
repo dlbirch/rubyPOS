@@ -14,6 +14,7 @@ describe IsoField do
     iso_field = IsoField.new(value: "43583222233334444")
     jpos_iso_field = org.jpos.iso.ISOField.new(-1, "43583222233334444")
     expect(iso_field.field_number).to eq(jpos_iso_field.field_number)
+    expect(iso_field.get_key).to eq(jpos_iso_field.get_key)
   end
 
   it "should create an IsoField without spec'ing a value that matches the jPOS version" do
