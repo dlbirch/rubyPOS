@@ -1,7 +1,10 @@
 require 'iso_error'
 require 'iso'
+require 'iso_component'
 
-class IsoField
+# Implementation of the 'Leaf' piece of the GOF Composite pattern.  The leaf here
+# is an IsoField that represents an indivisible building block of a larger message.
+class IsoField < IsoComponent
   attr_accessor(:field_number, :value)
 
   def initialize(field_number: -1, value: '')

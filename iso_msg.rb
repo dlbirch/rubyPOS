@@ -1,14 +1,15 @@
 require 'iso'
 require 'iso_error'
 require 'iso_field'
-require 'java'
 
-class IsoMsg
+# Implementation of the 'Composite' piece of the GOF Composite pattern.  The composite is a component but
+# is also a higher-level object that may be built up from sub-components.
+class IsoMsg < IsoComponent
   attr_accessor(:fields, :bitmap, :max_field, :direction, :header, :dirty, :max_field_dirty, :field_number)
   #attr_accessor(:packager, :source_ref)
 
   def initialize(field_number: -1, mti: nil)
-    @fields = java.util.TreeMap.new
+    @fields = []
     @bitmap = []
     @max_field = -1
     @dirty = true
@@ -40,7 +41,6 @@ class IsoMsg
   # public void set (String fpath, byte[] value)
   # public void set (int fldno, byte[] value)
   def set(iso_component: nil, field_number: -1, string_value: '', field_path: '', byte_value: nil)
-    puts "iso_component: #{iso_component.inspect}, field_number: #{field_number.to_s}, string_value: #{string_value}, field_path: #{field_path}, byte_value: #{byte_value.inspect}"
     unless iso_component.nil?
       i = iso_component.get_key
       @fields[i] = iso_component
