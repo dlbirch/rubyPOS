@@ -14,34 +14,33 @@ describe RightPadder do
     expect(rp.pad(data, 10)).to eq("PAD_ME!***")
   end
 
+  before(:each) do
+    @rp = RightPadder.SPACE_PADDER
+  end
+
   it 'should pad using default space padder' do
-    rp = RightPadder.SPACE_PADDER
     data = "PAD_ME!"
-    expect(rp.pad(data, 10)).to eq("PAD_ME!   ")
+    expect(@rp.pad(data, 10)).to eq("PAD_ME!   ")
   end
 
   it 'should unpad correctly using default space padder' do
-    rp = RightPadder.SPACE_PADDER
     data = "PAD_ME!"
-    padded_data = rp.pad(data, 10)
-    expect(rp.unpad(padded_data)).to eq(data)
+    padded_data = @rp.pad(data, 10)
+    expect(@rp.unpad(padded_data)).to eq(data)
   end
 
   it 'should reject attempts to pad strings greater in length than max length' do
-    rp = RightPadder.SPACE_PADDER
     data = "12345678901234567890"
-    expect {rp.pad(data, 10)}.to raise_error(IsoError)
+    expect {@rp.pad(data, 10)}.to raise_error(IsoError)
   end
 
   it 'should handle cases where no padding is necessary' do
-    rp = RightPadder.SPACE_PADDER
-    expect(rp.pad("1234567890", 10)).to eq("1234567890")
+    expect(@rp.pad("1234567890", 10)).to eq("1234567890")
   end
 
   it 'should handle cases where no unpadding is necessary' do
-    rp = RightPadder.SPACE_PADDER
     padded_data = "1234567890"
-    expect(rp.unpad(padded_data)).to eq(padded_data)
+    expect(@rp.unpad(padded_data)).to eq(padded_data)
   end
 
 end

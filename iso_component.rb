@@ -1,10 +1,10 @@
 require 'iso'
 require 'iso_error'
 
-# Implementation of the 'component' piece of the GOF Composite pattern.  Here we provide for
+# Implementation of the 'Component' piece of the GOF Composite pattern.  Here we provide for
 # a common interface for all of our iso message content.
 class IsoComponent
-  attr_accessor(:parent)
+  attr_accessor(:parent, :field_number)
 
   def initialize(parent: nil)
     @parent = parent
@@ -27,6 +27,51 @@ class IsoComponent
   def get_composite()
     return nil
   end
+
+  # Valid on Leafs only.
+  # The value returned is used by ISOMsg as a key
+  # to this field
+  def get_key()
+    raise(IsoError, IsoError.tag_the_message("Operation not available in Composite"))
+  end
+
+  # Valid on Leafs only.
+  def get_value()
+    raise(IsoError, IsoError.tag_the_message("Operation not available in Composite"))
+  end
+
+  # returns Value as bytes (when possible)
+  def get_bytes()
+    raise(IsoError, IsoError.tag_the_message("Operation not available in Composite"))
+  end
+
+  # a Composite must override this function
+  def get_max_field()
+    0
+  end
+
+  # Dummy behaviour - return 0 elements Hashtable
+  def get_children()
+    {}
+  end
+
+  # Changes this Component field number<br>
+  # Use with care, as this method does not change any reference held by a Composite.
+  def set_field_number(field_number)
+    @field_number = field_number
+  end
+
+  def my_method
+    raise NotImplementedError, "Implement this method in a child class"
+  end
+  #public abstract void setValue(Object obj) throws ISOException;
+  #public abstract byte[] pack() throws ISOException;
+  #public abstract int unpack(byte[] b) throws ISOException;
+  #public abstract void dump (PrintStream p, String indent);
+  #public void pack (OutputStream out) throws IOException, ISOException {
+  #  out.write (pack ());
+  #}
+  #public abstract void unpack (InputStream in) throws IOException, ISOException;
 
 
 end

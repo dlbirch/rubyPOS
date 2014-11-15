@@ -8,20 +8,21 @@ describe NullPadder do
     expect(np).to be_truthy
   end
 
+  before(:each) do
+    @np = NullPadder.INSTANCE
+  end
+
   it 'should return a new INSTANCE' do
-    np = NullPadder.INSTANCE
-    expect(np).to be_truthy
+    expect(@np).to be_truthy
   end
 
   it 'should return data unchanged' do
-    np = NullPadder.INSTANCE
-    expect(np.pad("1234567890123456789", 19)).to eq("1234567890123456789")
+    expect(@np.pad("1234567890123456789", 19)).to eq("1234567890123456789")
   end
 
   it 'should return padded_data unchanged' do
-    np = NullPadder.INSTANCE
     padded_data = "1234567890"
-    expect(np.unpad(padded_data)).to eq(padded_data)
+    expect(@np.unpad(padded_data)).to eq(padded_data)
   end
 
 end
