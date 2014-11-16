@@ -7,7 +7,7 @@ require 'iso_component'
 class IsoField < IsoComponent
   attr_accessor(:field_number, :value)
 
-  def initialize(field_number: -1, value: '')
+  def initialize(field_number: -1, value: nil)
     @field_number = field_number
     @value = value
   end
@@ -28,7 +28,7 @@ class IsoField < IsoComponent
   end
 
   # Return byte[] representing this field
-  def get_bytes
+  def get_bytes()
     unless @value.nil?
       byte_array = []
       begin
@@ -42,6 +42,30 @@ class IsoField < IsoComponent
     end
   end
 
+  def value=(value)
+    if value.is_a?(String)
+      @value = value
+    else
+      @value = value.to_s
+    end
+  end
 
+  # Dummied in ... needs further work
+  def dump(print_stream, indent)
+    puts "#{indent.to_s} Field Number: #{field_number.to_s} Value: #{value.to_s}"
+  end
+
+  # Dummied in ... needs further work
+  def write_external(out_stream)
+    # out.writeShort (fieldNumber);
+    # out.writeUTF (value);
+    puts value.to_s
+  end
+
+  # Dummied in ... needs further work
+  def read_external(in_stream)
+    # fieldNumber = in.readShort ();
+    # value       = in.readUTF();
+  end
 
 end
