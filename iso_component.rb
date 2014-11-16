@@ -58,20 +58,23 @@ class IsoComponent
   # Changes this Component field number<br>
   # Use with care, as this method does not change any reference held by a Composite.
   def set_field_number(field_number)
-    @field_number = field_number
-  end
-
-  def my_method
     raise NotImplementedError, "Implement this method in a child class"
   end
-  #public abstract void setValue(Object obj) throws ISOException;
-  #public abstract byte[] pack() throws ISOException;
-  #public abstract int unpack(byte[] b) throws ISOException;
-  #public abstract void dump (PrintStream p, String indent);
-  #public void pack (OutputStream out) throws IOException, ISOException {
-  #  out.write (pack ());
-  #}
-  #public abstract void unpack (InputStream in) throws IOException, ISOException;
 
+  def set_value(value)
+    raise NotImplementedError, "Implement this method in a child class"
+  end
+
+  def pack(out_stream: nil)
+    raise NotImplementedError, "Implement this method in a child class"
+  end
+
+  def unpack(byte_array: [], in_stream: nil)
+    raise NotImplementedError, "Implement this method in a child class"
+  end
+
+  def dump(stream: nil, indent: nil)
+    raise NotImplementedError, "Implement this method in a child class"
+  end
 
 end
