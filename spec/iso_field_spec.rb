@@ -39,7 +39,8 @@ describe IsoField do
     expect(byte_array).to eq([52, 51, 53, 54, 50, 50, 50, 50, 52, 52, 52, 52, 56, 56, 56, 56])
   end
 
-  it 'Should dump th field number and value of the field' do
+  it 'Should dump the field number and value of the field' do
+    #puts "Dumping an IsoField ..."
     @field.dump(nil, "  ")
   end
 

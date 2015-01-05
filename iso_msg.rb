@@ -2,7 +2,7 @@ require 'iso'
 require 'iso_error'
 require 'iso_field'
 
-# Implementation of the 'Composite' piece of the GOF Composite pattern.  The composite is a component but
+# Implementation of the 'Composite' piece of the GOF Composite pattern.  The composite 'is a' component but
 # is also a higher-level object that may be built up from sub-components.
 class IsoMsg < IsoComponent
   attr_accessor(:fields, :bitmap, :max_field, :direction, :header, :dirty, :max_field_dirty, :field_number)
@@ -36,11 +36,11 @@ class IsoMsg < IsoComponent
 
   # public void set (ISOComponent c)
   # public void set(int fldno, String value)
-  # public void set (String fpath, String value)
-  # public void set (String fpath, ISOComponent c)
-  # public void set (String fpath, byte[] value)
+  # public void set (String fieldPath, String value)
+  # public void set (String fieldPath, ISOComponent c)
+  # public void set (String fieldPath, byte[] value)
   # public void set (int fldno, byte[] value)
-  def set(iso_component: nil, field_number: -1, string_value: '', field_path: '', byte_value: nil)
+  def set(iso_component: nil, field_number: -1, string_value: '', field_path: '', byte_array: nil)
     unless iso_component.nil?
       i = iso_component.get_key
       @fields[i] = iso_component
